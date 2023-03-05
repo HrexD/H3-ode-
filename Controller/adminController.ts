@@ -1,6 +1,6 @@
 import { Router } from 'express'
-import { Model } from '../Models/Model';
-import { User, CreateUserSchema, UpdateArtistSchema, removePassword, UpdateUserInfoSchema, UpdateArtistbannedSchema } from '../Models/User'
+import  {Model} from '../models/Model';
+import { User, CreateUserSchema, UpdateArtistSchema, removePassword, UpdateUserInfoSchema, UpdateArtistbannedSchema } from '../models/User'
 import { hashPassword } from '../Services/HashService';
 
 const router = Router()

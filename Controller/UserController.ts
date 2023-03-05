@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import adminRoute from './AdminController'
-import artistRoute from './ArtistController'
-import managerRoute from './ManagerController'
+import adminRoute from '../Auth/AuthController'
+import artistRoute from './artistController'
+import managerRoute from './managerController'
 
 const router = Router()
 

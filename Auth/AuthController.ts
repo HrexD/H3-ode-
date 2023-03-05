@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { comparePassword } from '../Services/HashService';
-import { User, removePassword } from '../Models/User';
+import { User, removePassword } from '../models/User';
 import { generateToken } from './AuthService';
 import type LoginDTO from '../DTO/LoginDTO';
 import { loginSchema } from '../DTO/LoginDTO';
