@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken'
-import { type User, removePassword } from '../models/User'
+import { type User, removePassword } from '../Models/User'
 
 export const generateToken = (user: typeof User) => {
   // create a jwt token that is valid for 7 days

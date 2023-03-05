@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import { Approval } from '../models/approval';
+import { Approval } from '../Models/approval';
 const Joi = require('joi');  
-import { Model, CreateModelSchema, UpdateModelSchema, removeApprovals } from '../models/Model';
-import { User, CreateUserSchema, UpdateUserInfoSchema, removePassword } from '../models/User';
+import { Model, CreateModelSchema, UpdateModelSchema, removeApprovals } from '../Models/Model';
+import { User, CreateUserSchema, UpdateUserInfoSchema, removePassword } from '../Models/User';
 import { hashPassword } from '../Services/HashService';
 
 const router = Router()
