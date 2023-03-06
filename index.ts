@@ -26,6 +26,15 @@ app.get('/', (req, res) => {
 })
 
 app.use('/auth', authRouter);
+
+// Middleware pour vérifier si l'utilisateur est authentifié
+app.use((req, res, next) => {
+  if (!(req.session as any).user || !(req.session as any).user.id) {
+    return res.status(401).json({ message: "Vous devez vous connecter pour accéder à cette ressource." });
+  }
+  next();
+});
+
 app.use(usersRouter);
 
 app.listen(3000, () => {

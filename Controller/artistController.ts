@@ -10,7 +10,7 @@ const routeArtist = "/artist"
 // Middleware pour vérifier si l'utilisateur possede le role "admin" ou "artist"
 router.use((req, res, next) => {
   if (!(req.session as any).user || (req.session as any).user.role !== 'admin' || (req.session as any).user.role !== 'artist') {
-    return res.status(401).json({ message: "Vous n'avez pas les droits nécessaires pour accéder à cette resource." });
+    return res.status(401).json({ message: "Vous n'avez pas les droits nécessaires pour accéder à cette resource (artist)." });
   }
   next();
 });

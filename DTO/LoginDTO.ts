@@ -7,7 +7,7 @@ export const loginSchema = Joi.object({
 })
 
 export default interface LoginDTO {
-    email: string
-    username: string
-    password: string
+    email: string;
+    username: string;
+    password: string;
 }

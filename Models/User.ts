@@ -63,4 +63,4 @@ const userSchema = new mongoose.Schema({
     updated_at: Date
 })
 
-export const User = mongoose.model('Person', userSchema)
+export const User = mongoose.model('User', userSchema)

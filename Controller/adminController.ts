@@ -9,7 +9,7 @@ const routeAdmin = "/admin"
 // Middleware pour vérifier si l'utilisateur possede le role "admin"
 router.use((req, res, next) => {
   if (!(req.session as any).user || (req.session as any).user.role !== 'admin') {
-    return res.status(401).json({ message: "Vous n'avez pas les droits nécessaires pour accéder à cette resource." });
+    return res.status(401).json({ message: "Vous n'avez pas les droits nécessaires pour accéder à cette resource (admin)." });
   }
   next();
 });

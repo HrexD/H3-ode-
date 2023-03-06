@@ -13,6 +13,7 @@ db.createUser(
 db.createCollection("users");
 
 db.users.insertOne({
+    "id": 1,
     "name": "admin",
     "email": "admin@example.com",
     "password": {
