@@ -13,13 +13,13 @@ export const UpdateApprovalSchema = joi.object({
 
 const approvalSchema = new mongoose.Schema({
     modelId: { 
-        type: Number, required: true 
+        type: String, required: true 
     },
     artistId: { 
-        type: Number, required: true 
+        type: String, required: true 
     },
     managerId: { 
-        type: Number, required: true 
+        type: String, required: true 
     },
     approved: { 
         type: String,
