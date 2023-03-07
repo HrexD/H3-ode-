@@ -5,43 +5,21 @@ import { User, CreateUserSchema, UpdateUserInfoSchema, removePassword } from '..
 import { hashPassword } from '../Services/HashService';
 
 const router = Router()
-const routeArtist = "/artist"
 
 // Middleware pour vérifier si l'utilisateur possede le role "admin" ou "artist"
 router.use((req, res, next) => {
-  if (!(req.session as any).user || (req.session as any).user.role !== 'admin' || (req.session as any).user.role !== 'artist') {
+  console.log((req.session as any).user.role)
+  if (!(req.session as any).user || (req.session as any).user.role !== 'admin' && (req.session as any).user.role !== 'artist') {
     return res.status(401).json({ message: "Vous n'avez pas les droits nécessaires pour accéder à cette resource (artist)." });
   }
   next();
 });
 
-// Enregistrer un nouvel artiste
-router.post(routeArtist + '/register', async (req, res) => {
-  const { error } = CreateUserSchema.validate(req.body);
-  if (error) return res.status(400).json({error : error.details[0].message });
-
-  if (req.body.role !== 'artist') return res.status(404).json({error : `Vous ne pouvez pas créer autre chose qu'un artiste.` });
-
-  const isUserAlreadyExist = await User.findOne({ email: req.body.email, userName: req.body.username });
-  if (isUserAlreadyExist) return res.status(400).json({ error: 'Utilisateur déja existant.' });
-
-  const user = new User({
-    ...req.body,
-    password: hashPassword(req.body.password),
-  });
-  await user.save();
-
-  return res
-    .status(201)
-    .json(removePassword(user.toObject()));
- 
-});
-
 // Patch/Update des infos de l'artiste
-router.patch(routeArtist +'/updateInfo', async (req, res) => {
-
+router.patch('/updateInfo', async (req, res) => {
+  
   if ((req.session as any).user.role !== 'artist') {
-    return res.status(401).json({ message: "Vous n'avez pas l'autorisation de modifier le profil." });
+    return res.status(401).json({ message: "Votre compte ne vous permet pas d'accéder à cette fonctionnalité." });
   }
 
   const { error } = UpdateUserInfoSchema.validate(req.body);
@@ -49,10 +27,10 @@ router.patch(routeArtist +'/updateInfo', async (req, res) => {
   if(req.body.password) {
     req.body.password = hashPassword(req.body.password);
   }
-  const user = await User.findByIdAndUpdate((req.session as any).user.id, req.body, {new: true});
+  const user = await User.findByIdAndUpdate((req.session as any).user._id, req.body, {new: true});
 
   if (user == null) {
-      return res.status(404).json({ error: `Utilisateur avec l'ID ${req.params.id} introuvable.` });
+      return res.status(404).json({ error: `Utilisateur avec l'ID ${(req.session as any).user._id} introuvable.` });
   }
   
   return res
@@ -61,7 +39,7 @@ router.patch(routeArtist +'/updateInfo', async (req, res) => {
 })
 
 // Recherche toute les maquettes d'un artiste
-router.get(routeArtist + '/:id/models', async (req, res) => {
+router.get('/:id/models', async (req, res) => {
   const models = await Model.find({ artist: req.params.id });
   console.log((req as any).auth);
   if (models == null) {
@@ -77,7 +55,7 @@ router.get(routeArtist + '/:id/models', async (req, res) => {
 
 
 // Recherche d'une maquette par l'id de l'artiste et de l'id de la maquette
-router.get(routeArtist + '/:id/models/:modelId', async (req, res) => {
+router.get('/:id/models/:modelId', async (req, res) => {
   const model = await Model.findOne({ _id: req.params.modelId, artist: { id: req.params.id } });
   if (!model) return res.status(404).json({ error: `La maquette possedant l'ID ${req.params.modelId} avec l'artiste possedant l'ID ${req.params.id} est introuvable.` });
 
@@ -90,7 +68,7 @@ router.get(routeArtist + '/:id/models/:modelId', async (req, res) => {
 
 // Création d'une nouvelle maquette pour un artiste 
 // + Middleware => Vérification si c'est bien un artiste qui fait la requete de création
-router.post(routeArtist + '/:id/models', async (req, res) => {
+router.post('/:id/models', async (req, res) => {
  
   if ((req.session as any).user.role !== 'artist') {
     return res.status(401).json({ message: "Vous n'avez pas l'autorisation de créer une maquette, seulement un artiste peut le faire." });
@@ -124,7 +102,7 @@ router.post(routeArtist + '/:id/models', async (req, res) => {
 });
 
 // Update une maquette par l'ID de la maquette et de l'artiste
-router.put(routeArtist + '/:id/models/:modelId', async (req, res) => {
+router.put('/:id/models/:modelId', async (req, res) => {
   
   const { error } = CreateModelSchema.validate(req.body);
 
@@ -144,7 +122,7 @@ router.put(routeArtist + '/:id/models/:modelId', async (req, res) => {
 });
 
 // Suppression d'une maquette pour un artiste en fonction d'un ID
-router.delete(routeArtist + '/:id/models/:modelId', async (req, res) => {
+router.delete('/:id/models/:modelId', async (req, res) => {
   const { id, modelId } = req.params;
   const model = await Model.findOneAndDelete({
     _id: modelId,

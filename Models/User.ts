@@ -4,16 +4,15 @@ import mongoose from 'mongoose'
 export const CreateUserSchema = joi.object({
     firstName: joi.string().required(),
     lastName: joi.string().required(),
-    username: joi.string().required(),
+    userName: joi.string().required(),
     email: joi.string().email().required(),
-    password: joi.string().required(),
-    role: joi.string().valid('admin','artist','manager').required()
+    password: joi.string().required()
 }).required()
 
 export const UpdateUserInfoSchema = joi.object({
     firstName: joi.string().optional(),
     lastName: joi.string().optional(),
-    username: joi.string().optional(),
+    userName: joi.string().optional(),
     email: joi.string().email().optional(),
     password: joi.string().optional()
 }).required()
@@ -25,7 +24,7 @@ export const UpdateArtistbannedSchema = joi.object({
 export const UpdateArtistSchema = joi.object({
     firstName: joi.string().optional(),
     lastName: joi.string().optional(),
-    username: joi.string().optional(),
+    userName: joi.string().optional(),
     email: joi.string().email().optional(),
     password: joi.string().optional(),
     isBanned: joi.boolean().optional()

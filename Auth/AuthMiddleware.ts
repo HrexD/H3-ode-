@@ -9,7 +9,8 @@ export const jwt = () => {
     path: [
       // public routes that don't require authentication
       '/auth/login',
-      '/auth/register'
+      '/auth/register',
+      '/register'
     ]
   })
 }

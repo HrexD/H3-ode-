@@ -6,7 +6,6 @@ import { User, CreateUserSchema, UpdateUserInfoSchema, removePassword } from '..
 import { hashPassword } from '../Services/HashService';
 
 const router = Router()
-const routeManager = "/manager"
 
 // Middleware pour vérifier si l'utilisateur possede le role "admin" ou "manager"
 router.use((req, res, next) => {
@@ -17,7 +16,7 @@ router.use((req, res, next) => {
 });
 
 // Patch/Update des infos de l'artiste
-router.patch(routeManager + '/updateInfo', async (req, res) => {
+router.patch('/updateInfo', async (req, res) => {
 
   if ((req.session as any).user.role !== 'manager') {
     return res.status(401).json({ message: "Vous n'avez pas l'autorisation de modifier le profil." });
@@ -28,10 +27,10 @@ router.patch(routeManager + '/updateInfo', async (req, res) => {
   if(req.body.password) {
     req.body.password = hashPassword(req.body.password);
   }
-  const user = await User.findByIdAndUpdate((req.session as any).user.id, req.body, {new: true});
+  const user = await User.findByIdAndUpdate((req.session as any).user._id, req.body, {new: true});
 
   if (user == null) {
-      return res.status(404).json({ error: `Utilisateur avec l'ID ${req.params.id} introuvable.` });
+      return res.status(404).json({ error: `Utilisateur avec l'ID ${(req.session as any).user._id} introuvable.` });
   }
   
   return res
@@ -41,25 +40,25 @@ router.patch(routeManager + '/updateInfo', async (req, res) => {
 
 
 // Rechercher toutes les maquettes
-router.get(routeManager + '/models', async (req, res) => {
+router.get('/models', async (req, res) => {
   const models = await Model.find();
   res.status(200).json(removeApprovals(models.map((model: typeof Model) => removeApprovals(model.toObject()))));
 });
 
 // Rechercher toutes les maquettes auquels le manager a participé
-router.get(routeManager + '/models', async (req, res) => {
+router.get('/models', async (req, res) => {
   const models = await Model.find( {approval: { managerId: (req.session as any).user.id }} );
   res.status(200).json(removeApprovals(models.map((model: typeof Model) => removeApprovals(model.toObject()))));
 });
 
 // Rechercher toutes les maquettes auquels le manager n'a pas participé
-router.get(routeManager + '/models', async (req, res) => {
+router.get('/models', async (req, res) => {
   const models = await Model.find( {approval: { managerId: !(req.session as any).user.id }} );
   res.status(200).json(removeApprovals(models.map((model: typeof Model) => removeApprovals(model.toObject()))));
 });
 
 // Recherche une maquette en fonction de son ID
-router.get(routeManager + '/models/:modelId', async (req, res) => {
+router.get('/models/:modelId', async (req, res) => {
   const model = await Model.findById(req.params.modelId);
   if (!model) {
     return res.status(404).json({ message: 'Submission not found' });
@@ -68,7 +67,7 @@ router.get(routeManager + '/models/:modelId', async (req, res) => {
 });
 
 // Approuver ou non une maquette en fonction de l'ID de la maquette
-router.put(routeManager + '/models/:modelId/approval', async (req, res) => {
+router.put('/models/:modelId/approval', async (req, res) => {
 
   if ((req.session as any).user.role !== 'manager') {
     return res.status(401).json({ message: "Vous n'avez pas l'autorisation d'accepter ou non cette maquette." });
