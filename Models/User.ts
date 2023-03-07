@@ -18,7 +18,7 @@ export const UpdateUserInfoSchema = joi.object({
 }).required()
 
 export const UpdateArtistbannedSchema = joi.object({
-    isBanned: joi.boolean().optional()
+    isBanned: joi.boolean().required()
 }).required()
 
 export const UpdateArtistSchema = joi.object({

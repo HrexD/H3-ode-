@@ -76,46 +76,50 @@ router.patch('/updateInfo', async (req, res) => {
 })
 
 // Update d'un artist => banir un artiste
-router.put('/users/:id', async (req, res) => {
+router.put('/ban/:id', async (req, res) => {
 
-  const { error } = UpdateArtistbannedSchema.validate(req.body);
+  const { error } = UpdateArtistbannedSchema.validate(req.body)
+  
+  const { id } = req.params
 
-  const user = await User.findById(req.params.id);
+  const user = await User.findById(id);
 
   if (user == null) {
-      return res.status(404).json({ error: `Utilisateur avec l'ID ${req.params.id} introuvable.` });
+      return res.status(404).json({ error: `Utilisateur avec l'ID ${id} introuvable.` });
   }
-
   if (user.role !== 'artist') {
     return res.status(401).json({ message: "Vous ne pouvez pas banir quelqu'un qui n'est pas un artiste." });
   }
 
-  user.set(req.body);
-  await user.save();
+  await User.updateOne({_id: id}, {$set: {isBanned: req.body.isBanned, updated_at: new Date()} });
+
+  const userUp = await User.findById(id);
  
   return res
       .status(200)
-      .json(removePassword(user.toObject()));
+      .json(removePassword(userUp?.toObject()));
 })
 
 // Suppression d'un utilisateur par son id
-router.delete('/users/:id', async (req, res) => {
-    const user = await User.findByIdAndDelete(req.params.id);
-    if (user == null) {
-        return res.status(404).json({ error: `Utilisateur avec l'ID ${req.params.id} introuvable.` });
-    }
+router.delete('/delete/:id', async (req, res) => {
 
-    if(parseInt(req.params.id) === 1) {
-      return res.status(404).json({ error: `Vous ne pouvez pas vous supprimer vous même.` });
-    }
+  const { id } = req.params
+  const user = await User.findByIdAndDelete(id);
+  if (user == null) {
+      return res.status(404).json({ error: `Utilisateur avec l'ID ${id} introuvable.` });
+  }
 
-    return res
-        .status(204)
-        .json(`Utilisateur avec l'ID ${req.params.id} supprimé avec succès.`);
+  if(id === "6407bcf1fe54545471fccfb6") {
+    return res.status(404).json({ error: `Vous ne pouvez pas vous supprimer vous même.` });
+  }
+
+  return res
+      .status(200)
+      .json(`Utilisateur avec l'ID ${id} supprimé avec succès.`);
 })
 
 
-// Rechercher toutes les maquettes avec toutes les appobations disponibles
+// Rechercher toutes les maquettes avec toutes les approbations disponibles
 router.get('/models', async (req, res) => {
   const models = await Model.find();
   res.status(200).json(models);

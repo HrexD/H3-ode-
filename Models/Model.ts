@@ -5,13 +5,13 @@ const User = require('./User');
 export const CreateModelSchema = joi.object({
     title: joi.string().required(),
     fileName: joi.string().required(),
-    url: joi.string().uri().required()
+    url: joi.string().required()
 }).required()
 
 export const UpdateModelSchema = joi.object({
     title: joi.string().optional(),
     fileName: joi.string().optional(),
-    url: joi.string().uri().optional()
+    url: joi.string().optional()
 }).required()
 
 export const removeApprovals = (model: any) => {
@@ -22,7 +22,7 @@ export const removeApprovals = (model: any) => {
 
 const modelSchema = new mongoose.Schema({
     artistId: {
-        type: Number,
+        type: String,
         required: true
     },
     title: {
