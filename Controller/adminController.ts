@@ -1,52 +1,124 @@
-// Import des modèles de données
-import  Artist  from "../models/artist";
-import  Manager from "../models/manager";
-import  Approval  from "../models/approval";
+import { Router } from 'express'
+import  {Model} from '../Models/Model';
+import { User, CreateUserSchema, UpdateArtistSchema, removePassword, UpdateUserInfoSchema, UpdateArtistbannedSchema } from '../Models/User'
+import { hashPassword } from '../Services/HashService';
 
-// Import de la fonction de vérification du rôle
-import { verifyRole } from "../middleware/verifyRole";
+const router = Router()
 
-// Définition de la route
-router.delete('/users/:id', verifyRole('admin'), async (req, res) => {
-  const { id } = req.params;
-  try {
-    // Vérification de l'existence de l'utilisateur
-    const user = await Artist.findById(id) || await Manager.findById(id);
-    if (!user) {
-      return res.status(404).json({ message: "Utilisateur non trouvé" });
-    }
-
-    // Si l'utilisateur est un artiste, suppression de ses maquettes associées
-    if (user instanceof Artist) {
-      await Approval.deleteMany({ artist: id });
-    }
-
-    // Suppression de l'utilisateur
-    await user.delete();
-
-    return res.status(200).json({ message: "Utilisateur supprimé avec succès" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Une erreur est survenue lors de la suppression de l'utilisateur" });
+// Middleware pour vérifier si l'utilisateur possede le role "admin"
+router.use((req, res, next) => {
+  if (!(req.session as any).user || (req.session as any).user.role !== 'admin') {
+    return res.status(401).json({ message: "Vous n'avez pas les droits nécessaires pour accéder à cette resource (admin)." });
   }
+  next();
 });
 
-router.put('/artists/:id/ban', verifyRole('admin'), async (req, res) => {
-  const { id } = req.params;
-  try {
-    // Vérification de l'existence de l'artiste
-    const artist = await Artist.findById(id);
-    if (!artist) {
-      return res.status(404).json({ message: "Artiste non trouvé" });
+// Affiche tout les utlisateurs (sans exceptions et sans leur mot de passe)
+router.get('/users', async (req, res) => {
+    const users = await User.find();
+    
+    return res
+        .status(200)
+        .json(removePassword(users.map((user) => removePassword(user.toObject()))));
+})
+
+// Création d'un manager
+router.post('/addManager', async (req, res) => {
+  const { error } = CreateUserSchema.validate(req.body);
+  if (error) return res.status(400).json({error : error.details[0].message });
+
+  if (req.body.role !== 'manager') return res.status(404).json({error : `Vous ne pouvez pas créer autre chose qu'un manager.` });
+
+  const isUserAlreadyExist = await User.findOne({ email: req.body.email, userName: req.body.username });
+  if (isUserAlreadyExist) return res.status(400).json({ error: 'Utilisateur déja existant.' });
+
+  const user = new User({
+    ...req.body,
+    password: hashPassword(req.body.password),
+  });
+  await user.save();
+
+  return res
+    .status(201)
+    .json(removePassword(user.toObject()));
+ 
+});
+
+// Recherche d'un utilisateur par son id
+router.get('/users/:id', async (req, res) => {
+    const user = await User.findById(req.params.id);
+    if (user == null) {
+        return res.status(404).json({ error: `Utilisateur avec l'ID ${req.params.id} introuvable.` });
+    }
+    return res
+        .status(200)
+        .json(removePassword(user.toObject()));
+})
+
+// Patch/Update des infos de l'admin
+router.patch('/updateInfo', async (req, res) => {
+
+    const { error } = UpdateUserInfoSchema.validate(req.body);
+
+    if(req.body.password) {
+      req.body.password = hashPassword(req.body.password);
     }
 
-    // Bannissement de l'artiste
-    artist.banned = true;
-    await artist.save();
+    const user = await User.findByIdAndUpdate((req.session as any).user._id, req.body, {new: true});
 
-    return res.status(200).json({ message: "Artiste banni avec succès" });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Une erreur est survenue lors du bannissement de l'artiste" });
+    if (user == null) {
+        return res.status(404).json({ error: `Utilisateur avec l'ID ${(req.session as any).user._id} introuvable.` });
+    }
+    
+    return res
+        .status(200)
+        .json(removePassword(user.toObject()));
+})
+
+// Update d'un artist => banir un artiste
+router.put('/users/:id', async (req, res) => {
+
+  const { error } = UpdateArtistbannedSchema.validate(req.body);
+
+  const user = await User.findById(req.params.id);
+
+  if (user == null) {
+      return res.status(404).json({ error: `Utilisateur avec l'ID ${req.params.id} introuvable.` });
   }
+
+  if (user.role !== 'artist') {
+    return res.status(401).json({ message: "Vous ne pouvez pas banir quelqu'un qui n'est pas un artiste." });
+  }
+
+  user.set(req.body);
+  await user.save();
+ 
+  return res
+      .status(200)
+      .json(removePassword(user.toObject()));
+})
+
+// Suppression d'un utilisateur par son id
+router.delete('/users/:id', async (req, res) => {
+    const user = await User.findByIdAndDelete(req.params.id);
+    if (user == null) {
+        return res.status(404).json({ error: `Utilisateur avec l'ID ${req.params.id} introuvable.` });
+    }
+
+    if(parseInt(req.params.id) === 1) {
+      return res.status(404).json({ error: `Vous ne pouvez pas vous supprimer vous même.` });
+    }
+
+    return res
+        .status(204)
+        .json(`Utilisateur avec l'ID ${req.params.id} supprimé avec succès.`);
+})
+
+
+// Rechercher toutes les maquettes avec toutes les appobations disponibles
+router.get('/models', async (req, res) => {
+  const models = await Model.find();
+  res.status(200).json(models);
 });
+
+export default router
