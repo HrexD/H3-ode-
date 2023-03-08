@@ -1,0 +1,686 @@
+{
+	"info": {
+		"_postman_id": "53d37a50-0486-4dfa-a049-d3f9c6b2a7b5",
+		"name": "eval universal node",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26166553"
+	},
+	"item": [
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "UpdateInfo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaXNCYW5uZWQiOmZhbHNlLCJfaWQiOiI2NDA2NmY0ZDgyOGIzMzFlOTlhYWM3MWIiLCJpZCI6MSwibmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjp7InNhbHQiOiIxOWY3ZTVhNDc2NGYiLCJwYXNzd29yZCI6ImRmMDliYzdhNmJlMWQxM2E3ODU4ZjA3NzFmNjZiY2Q1NGFhNWY5NWM1YjBlZWIyNjRmMzRhODEyZGRlNzBkOTc2NDk3Njg3ODgyMWY4Y2U2MmQ5NWI3OWRhOTU1NWFjYzExNWQ4ZWFhMzE0ODJiNzhjYTcwY2U0NjRlNmU2ODA2In0sInJvbGUiOiJhZG1pbiIsInJlZ2lzdHJhdGlvbkRhdGUiOiIyMDIzLTAzLTA2VDIyOjU1OjA5LjYxN1oiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wMy0wNlQyMjo1NTowOS42MTdaIn0sImlhdCI6MTY3ODIxMDAwNSwiZXhwIjoxNjc4ODE0ODA1fQ.K9yaEYsD2-G_lQtzck335fodn-30lclB-eMrCJkDgNQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"admin2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/admin/updateInfo",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"admin",
+								"updateInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaXNCYW5uZWQiOmZhbHNlLCJfaWQiOiI2NDA3YmNmMWZlNTQ1NDU0NzFmY2NmYjYiLCJpZCI6MSwibmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjp7InNhbHQiOiIxOWY3ZTVhNDc2NGYiLCJwYXNzd29yZCI6ImRmMDliYzdhNmJlMWQxM2E3ODU4ZjA3NzFmNjZiY2Q1NGFhNWY5NWM1YjBlZWIyNjRmMzRhODEyZGRlNzBkOTc2NDk3Njg3ODgyMWY4Y2U2MmQ5NWI3OWRhOTU1NWFjYzExNWQ4ZWFhMzE0ODJiNzhjYTcwY2U0NjRlNmU2ODA2In0sInJvbGUiOiJhZG1pbiIsInJlZ2lzdHJhdGlvbkRhdGUiOiIyMDIzLTAzLTA3VDIyOjM4OjQxLjMxNFoiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wMy0wN1QyMjozODo0MS4zMTRaIn0sImlhdCI6MTY3ODI5Njk2MywiZXhwIjoxNjc4OTAxNzYzfQ.zrlq89SLkfWZBKXOq26DKtXItE2u5nmY_bwpLEHGa1k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/admin/users",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"admin",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all collection models",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaXNCYW5uZWQiOmZhbHNlLCJfaWQiOiI2NDA3YmNmMWZlNTQ1NDU0NzFmY2NmYjYiLCJpZCI6MSwibmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjp7InNhbHQiOiIxOWY3ZTVhNDc2NGYiLCJwYXNzd29yZCI6ImRmMDliYzdhNmJlMWQxM2E3ODU4ZjA3NzFmNjZiY2Q1NGFhNWY5NWM1YjBlZWIyNjRmMzRhODEyZGRlNzBkOTc2NDk3Njg3ODgyMWY4Y2U2MmQ5NWI3OWRhOTU1NWFjYzExNWQ4ZWFhMzE0ODJiNzhjYTcwY2U0NjRlNmU2ODA2In0sInJvbGUiOiJhZG1pbiIsInJlZ2lzdHJhdGlvbkRhdGUiOiIyMDIzLTAzLTA3VDIyOjM4OjQxLjMxNFoiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wMy0wN1QyMjozODo0MS4zMTRaIn0sImlhdCI6MTY3ODIyOTgyMCwiZXhwIjoxNjc4ODM0NjIwfQ.K8i-FzLiOpsuCdd67WtFHiKoeXBndyGld8yGBbdpy7o",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/admin/models",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"admin",
+								"models"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaXNCYW5uZWQiOmZhbHNlLCJfaWQiOiI2NDA3YmNmMWZlNTQ1NDU0NzFmY2NmYjYiLCJpZCI6MSwibmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjp7InNhbHQiOiIxOWY3ZTVhNDc2NGYiLCJwYXNzd29yZCI6ImRmMDliYzdhNmJlMWQxM2E3ODU4ZjA3NzFmNjZiY2Q1NGFhNWY5NWM1YjBlZWIyNjRmMzRhODEyZGRlNzBkOTc2NDk3Njg3ODgyMWY4Y2U2MmQ5NWI3OWRhOTU1NWFjYzExNWQ4ZWFhMzE0ODJiNzhjYTcwY2U0NjRlNmU2ODA2In0sInJvbGUiOiJhZG1pbiIsInJlZ2lzdHJhdGlvbkRhdGUiOiIyMDIzLTAzLTA3VDIyOjM4OjQxLjMxNFoiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wMy0wN1QyMjozODo0MS4zMTRaIn0sImlhdCI6MTY3ODIzMDYwNSwiZXhwIjoxNjc4ODM1NDA1fQ.N8YzIbRJncAQOZDqik35XKLWKxicw2tuOuI9-5_Hv74",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/admin/users/delete/:id",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"admin",
+								"users",
+								"delete",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Ban user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaXNCYW5uZWQiOmZhbHNlLCJfaWQiOiI2NDA3YmNmMWZlNTQ1NDU0NzFmY2NmYjYiLCJpZCI6MSwibmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjp7InNhbHQiOiIxOWY3ZTVhNDc2NGYiLCJwYXNzd29yZCI6ImRmMDliYzdhNmJlMWQxM2E3ODU4ZjA3NzFmNjZiY2Q1NGFhNWY5NWM1YjBlZWIyNjRmMzRhODEyZGRlNzBkOTc2NDk3Njg3ODgyMWY4Y2U2MmQ5NWI3OWRhOTU1NWFjYzExNWQ4ZWFhMzE0ODJiNzhjYTcwY2U0NjRlNmU2ODA2In0sInJvbGUiOiJhZG1pbiIsInJlZ2lzdHJhdGlvbkRhdGUiOiIyMDIzLTAzLTA3VDIyOjM4OjQxLjMxNFoiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wMy0wN1QyMjozODo0MS4zMTRaIn0sImlhdCI6MTY3ODIzMjM4NSwiZXhwIjoxNjc4ODM3MTg1fQ.mfZEcgz7Do7F6BNMEoHpA0sc6UzkGG7q5PyCAMKVMio",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"isBanned\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/admin/ban/:id",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"admin",
+								"ban",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "6407c50e62414b88d58a6900"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create manager",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaXNCYW5uZWQiOmZhbHNlLCJfaWQiOiI2NDA3YmNmMWZlNTQ1NDU0NzFmY2NmYjYiLCJpZCI6MSwibmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjp7InNhbHQiOiIxOWY3ZTVhNDc2NGYiLCJwYXNzd29yZCI6ImRmMDliYzdhNmJlMWQxM2E3ODU4ZjA3NzFmNjZiY2Q1NGFhNWY5NWM1YjBlZWIyNjRmMzRhODEyZGRlNzBkOTc2NDk3Njg3ODgyMWY4Y2U2MmQ5NWI3OWRhOTU1NWFjYzExNWQ4ZWFhMzE0ODJiNzhjYTcwY2U0NjRlNmU2ODA2In0sInJvbGUiOiJhZG1pbiIsInJlZ2lzdHJhdGlvbkRhdGUiOiIyMDIzLTAzLTA3VDIyOjM4OjQxLjMxNFoiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wMy0wN1QyMjozODo0MS4zMTRaIn0sImlhdCI6MTY3ODMwMTMyNSwiZXhwIjoxNjc4OTA2MTI1fQ.TidBnsl8QQVAqeBMUjCdPF_LGnGmsrSxWsAn59I43OI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Man\",\r\n    \"lastName\": \"Ager\",\r\n    \"email\": \"testman4@test.com\",\r\n    \"password\": \"manager1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/admin/addManager",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"admin",
+								"addManager"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Manager",
+			"item": [
+				{
+					"name": "models collections",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiX2lkIjoiNjQwOGQ4OWQ3NTViZTU4YmVjNDQ1MTdkIiwiZmlyc3ROYW1lIjoiTWFuIiwibGFzdE5hbWUiOiJBZ2VyIiwiZW1haWwiOiJ0ZXN0bWFuNEB0ZXN0LmNvbSIsInBhc3N3b3JkIjp7InNhbHQiOiIyOTYwNzM2M2MzMWMiLCJwYXNzd29yZCI6ImNiODQ2NTJmNjY4NjI1OWM3NGUxZTY5NzQ5YWE5MTVlODQ5ODExZmU1ODRhZDAxYjM3MGI2MGJmOTA3M2RjNmYzNmQwODE3NTA1NGQ3OWFhZjAzOGNhZjExZDkwMWU2YWNkYWMzMGMxZTI0MTg1ZjFjZWU5YTcyMDI5MGY3NDkxIn0sImlzQmFubmVkIjpmYWxzZSwicm9sZSI6Im1hbmFnZXIiLCJyZWdpc3RyYXRpb25EYXRlIjoiMjAyMy0wMy0wOFQxODo0OTowMS45NjBaIiwiX192IjowfSwiaWF0IjoxNjc4MzAzOTExLCJleHAiOjE2Nzg5MDg3MTF9.xHhjyLe8AwJgpOBQJc3I18gO50zrv4HGvpISG28JlNI",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/manager/models",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"manager",
+								"models"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "model approval",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiX2lkIjoiNjQwOGQ4OWQ3NTViZTU4YmVjNDQ1MTdkIiwiZmlyc3ROYW1lIjoiTWFuIiwibGFzdE5hbWUiOiJBZ2VyIiwiZW1haWwiOiJ0ZXN0bWFuNEB0ZXN0LmNvbSIsInBhc3N3b3JkIjp7InNhbHQiOiIyOTYwNzM2M2MzMWMiLCJwYXNzd29yZCI6ImNiODQ2NTJmNjY4NjI1OWM3NGUxZTY5NzQ5YWE5MTVlODQ5ODExZmU1ODRhZDAxYjM3MGI2MGJmOTA3M2RjNmYzNmQwODE3NTA1NGQ3OWFhZjAzOGNhZjExZDkwMWU2YWNkYWMzMGMxZTI0MTg1ZjFjZWU5YTcyMDI5MGY3NDkxIn0sImlzQmFubmVkIjpmYWxzZSwicm9sZSI6Im1hbmFnZXIiLCJyZWdpc3RyYXRpb25EYXRlIjoiMjAyMy0wMy0wOFQxODo0OTowMS45NjBaIiwiX192IjowfSwiaWF0IjoxNjc4MzAyMjQ1LCJleHAiOjE2Nzg5MDcwNDV9.U-UDurkyKkj6GHCMcVyplN4uQD4F6TTqVAkZkRjV7zc",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"approved\": true,\r\n    \"comment\": \"C'était vraiment nul, mais j'accepte.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/manager/models/approval/:modelId",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"manager",
+								"models",
+								"approval",
+								":modelId"
+							],
+							"variable": [
+								{
+									"key": "modelId",
+									"value": "6407bd2c7732fe4c7a929a63"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Artist",
+			"item": [
+				{
+					"name": "UpdateInfo",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiX2lkIjoiNjQwNzc5YjFhZDlmOTVhMzY2OGM2ZWMxIiwiZmlyc3ROYW1lIjoiQm9iIiwibGFzdE5hbWUiOiJEeWxhbiIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInBhc3N3b3JkIjp7InNhbHQiOiI1MTRjMzIxMDE1YjUiLCJwYXNzd29yZCI6Ijg0NGE2ZjZhMThkZTU3MzZhODEwMmNmNjI3ZTlhMzdlMmE4ZjU0NjlhYjg5NmRhZGIyNmNmZjljZDZmMmVlNzg1ODkzZTBjNzY5OTMwMDkzODkwZmZiOTEyN2UwZDlhZGMwMDU2ZWJkYjFhODM3NTNhNGZjZGU5ODVlMzBlMjQ0In0sImlzQmFubmVkIjpmYWxzZSwicm9sZSI6ImFydGlzdCIsInJlZ2lzdHJhdGlvbkRhdGUiOiIyMDIzLTAzLTA3VDE3OjUxOjQ1LjU0NFoiLCJfX3YiOjB9LCJpYXQiOjE2NzgyMjcwOTksImV4cCI6MTY3ODgzMTg5OX0.l1DAxREs-pyNhEJ1w86R4hIz3Hvm2pBEriPFTecwFTw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"password\": \"artist12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/artist/updateInfo",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"artist",
+								"updateInfo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create model",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiX2lkIjoiNjQwN2JkMTM3NzMyZmU0YzdhOTI5YTVmIiwiZmlyc3ROYW1lIjoiQm9iIiwibGFzdE5hbWUiOiJEeWxhbiIsInVzZXJOYW1lIjoiYm9ieSIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInBhc3N3b3JkIjp7InNhbHQiOiIzODFhN2UyN2RiZWYiLCJwYXNzd29yZCI6Ijc5ZGRkMTQ0NjJjY2EwNzRjYzZhMzc2NTVmZTBlZGRlZmUwNjI5Y2U3N2U5OWQyMDUwNDIzZDMyMTAzZmI1YTY3ZDBjNDc4N2Y0YzQwNTk4ZjFhZmJmMjQyMTVjNjI4NzlkZDRmNGJkNzAwOWJjZGVjODM5OGQ1OTNmYzQyOTM1In0sImlzQmFubmVkIjpmYWxzZSwicm9sZSI6ImFydGlzdCIsInJlZ2lzdHJhdGlvbkRhdGUiOiIyMDIzLTAzLTA3VDIyOjM5OjE1Ljk5MloiLCJfX3YiOjB9LCJpYXQiOjE2NzgyMjkxNzAsImV4cCI6MTY3ODgzMzk3MH0.jkfV5DkqQlsvWkHUGia4NAU0wbb58t7Vpmqz3zVSUrk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Les phrases sont des aqueducs qui mènent vers de nouvelles contrées\",\r\n    \"fileName\": \"un_pont_une_région\",\r\n    \"url\": \"url\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/artist/models",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"artist",
+								"models"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "models collection",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiX2lkIjoiNjQwN2M1MGU2MjQxNGI4OGQ1OGE2OTAwIiwiZmlyc3ROYW1lIjoiQm9iIiwibGFzdE5hbWUiOiJEeWxhbiIsInVzZXJOYW1lIjoiYm9ieSIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInBhc3N3b3JkIjp7InNhbHQiOiJjNjA2OTljZWVhM2EiLCJwYXNzd29yZCI6ImZmNGJmMWJlZWFlYzJjOTM1ZWY1YTU0ZmM4NTllNGQ2YWI3MDVjMTMyZjNmYTA5YzgyOGJiN2ZjMWIzYjJjN2MzNmJjZmU5NDRkMjk2NzI4MTE1Yjc1ZWEyMDJiNTBmNTU3NWE4NmQwMTg3MWJkNDViZjQ0MmQ3MTY3MjI2OWYzIn0sImlzQmFubmVkIjpmYWxzZSwicm9sZSI6ImFydGlzdCIsInJlZ2lzdHJhdGlvbkRhdGUiOiIyMDIzLTAzLTA3VDIzOjEzOjE4LjYzMVoiLCJfX3YiOjAsInVwZGF0ZWRfYXQiOiIyMDIzLTAzLTA3VDIzOjM5OjU0LjcxMloifSwiaWF0IjoxNjc4Mjk1NDQyLCJleHAiOjE2Nzg5MDAyNDJ9.KHhWrDu7EZFooLzf8Pn9OQTLF9QfYQvKchdQKJI57RU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/artist/models",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"artist",
+								"models"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "one model",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiX2lkIjoiNjQwN2JkMTM3NzMyZmU0YzdhOTI5YTVmIiwiZmlyc3ROYW1lIjoiQm9iIiwibGFzdE5hbWUiOiJEeWxhbiIsInVzZXJOYW1lIjoiYm9ieSIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInBhc3N3b3JkIjp7InNhbHQiOiIzODFhN2UyN2RiZWYiLCJwYXNzd29yZCI6Ijc5ZGRkMTQ0NjJjY2EwNzRjYzZhMzc2NTVmZTBlZGRlZmUwNjI5Y2U3N2U5OWQyMDUwNDIzZDMyMTAzZmI1YTY3ZDBjNDc4N2Y0YzQwNTk4ZjFhZmJmMjQyMTVjNjI4NzlkZDRmNGJkNzAwOWJjZGVjODM5OGQ1OTNmYzQyOTM1In0sImlzQmFubmVkIjpmYWxzZSwicm9sZSI6ImFydGlzdCIsInJlZ2lzdHJhdGlvbkRhdGUiOiIyMDIzLTAzLTA3VDIyOjM5OjE1Ljk5MloiLCJfX3YiOjB9LCJpYXQiOjE2NzgyMjk1OTUsImV4cCI6MTY3ODgzNDM5NX0.9Xfet3OBTb1M6lTEc7W5cZ6gnk6BOnc1M5iPREouzAY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/artist/models/:modelId",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"artist",
+								"models",
+								":modelId"
+							],
+							"variable": [
+								{
+									"key": "modelId",
+									"value": "6407bd2c7732fe4c7a929a63"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update model",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiX2lkIjoiNjQwN2M1MGU2MjQxNGI4OGQ1OGE2OTAwIiwiZmlyc3ROYW1lIjoiQm9iIiwibGFzdE5hbWUiOiJEeWxhbiIsInVzZXJOYW1lIjoiYm9ieSIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInBhc3N3b3JkIjp7InNhbHQiOiJjNjA2OTljZWVhM2EiLCJwYXNzd29yZCI6ImZmNGJmMWJlZWFlYzJjOTM1ZWY1YTU0ZmM4NTllNGQ2YWI3MDVjMTMyZjNmYTA5YzgyOGJiN2ZjMWIzYjJjN2MzNmJjZmU5NDRkMjk2NzI4MTE1Yjc1ZWEyMDJiNTBmNTU3NWE4NmQwMTg3MWJkNDViZjQ0MmQ3MTY3MjI2OWYzIn0sImlzQmFubmVkIjpmYWxzZSwicm9sZSI6ImFydGlzdCIsInJlZ2lzdHJhdGlvbkRhdGUiOiIyMDIzLTAzLTA3VDIzOjEzOjE4LjYzMVoiLCJfX3YiOjAsInVwZGF0ZWRfYXQiOiIyMDIzLTAzLTA3VDIzOjM5OjU0LjcxMloifSwiaWF0IjoxNjc4Mjk2MjAzLCJleHAiOjE2Nzg5MDEwMDN9.bcd3YaDB3fsI_Qxt9Phyokd0R4xJlKWHbMQiZt-73a0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"le musique dans la peau\",\r\n    \"fileName\": \"musique\",\r\n    \"url\": \"https://www.youtube.com/watch?v=ZizAJHGr-qs&ab_channel=ToastedShoes\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/artist/models/:modelId",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"artist",
+								"models",
+								":modelId"
+							],
+							"variable": [
+								{
+									"key": "modelId",
+									"value": "6408c1ad925b9650d3438ea4"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete model",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiX2lkIjoiNjQwN2M1MGU2MjQxNGI4OGQ1OGE2OTAwIiwiZmlyc3ROYW1lIjoiQm9iIiwibGFzdE5hbWUiOiJEeWxhbiIsInVzZXJOYW1lIjoiYm9ieSIsImVtYWlsIjoidGVzdEB0ZXN0LmNvbSIsInBhc3N3b3JkIjp7InNhbHQiOiJjNjA2OTljZWVhM2EiLCJwYXNzd29yZCI6ImZmNGJmMWJlZWFlYzJjOTM1ZWY1YTU0ZmM4NTllNGQ2YWI3MDVjMTMyZjNmYTA5YzgyOGJiN2ZjMWIzYjJjN2MzNmJjZmU5NDRkMjk2NzI4MTE1Yjc1ZWEyMDJiNTBmNTU3NWE4NmQwMTg3MWJkNDViZjQ0MmQ3MTY3MjI2OWYzIn0sImlzQmFubmVkIjpmYWxzZSwicm9sZSI6ImFydGlzdCIsInJlZ2lzdHJhdGlvbkRhdGUiOiIyMDIzLTAzLTA3VDIzOjEzOjE4LjYzMVoiLCJfX3YiOjAsInVwZGF0ZWRfYXQiOiIyMDIzLTAzLTA3VDIzOjM5OjU0LjcxMloifSwiaWF0IjoxNjc4Mjk2MjAzLCJleHAiOjE2Nzg5MDEwMDN9.bcd3YaDB3fsI_Qxt9Phyokd0R4xJlKWHbMQiZt-73a0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/artist/models/:modelId",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"artist",
+								"models",
+								":modelId"
+							],
+							"variable": [
+								{
+									"key": "modelId",
+									"value": "6408c1ad925b9650d3438ea4"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Register (artist)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\": \"Bob\",\r\n    \"lastName\": \"Dylan\",\r\n    \"userName\": \"boby\",\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"artist1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/register",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"admin@example.com\",\r\n    \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/auth/login",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Manager",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"testman@test.com\",\r\n    \"password\": \"manager1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/auth/login",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Manager Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"testman4@test.com\",\r\n    \"password\": \"manager1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/auth/login",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login Artist",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"artist1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{local}}/auth/login",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOnsiaXNCYW5uZWQiOmZhbHNlLCJfaWQiOiI2NDA2NmY0ZDgyOGIzMzFlOTlhYWM3MWIiLCJpZCI6MSwibmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZG1pbkBleGFtcGxlLmNvbSIsInBhc3N3b3JkIjp7InNhbHQiOiIxOWY3ZTVhNDc2NGYiLCJwYXNzd29yZCI6ImRmMDliYzdhNmJlMWQxM2E3ODU4ZjA3NzFmNjZiY2Q1NGFhNWY5NWM1YjBlZWIyNjRmMzRhODEyZGRlNzBkOTc2NDk3Njg3ODgyMWY4Y2U2MmQ5NWI3OWRhOTU1NWFjYzExNWQ4ZWFhMzE0ODJiNzhjYTcwY2U0NjRlNmU2ODA2In0sInJvbGUiOiJhZG1pbiIsInJlZ2lzdHJhdGlvbkRhdGUiOiIyMDIzLTAzLTA2VDIyOjU1OjA5LjYxN1oiLCJ1cGRhdGVkX2F0IjoiMjAyMy0wMy0wNlQyMjo1NTowOS42MTdaIn0sImlhdCI6MTY3ODIxMDAwNSwiZXhwIjoxNjc4ODE0ODA1fQ.K9yaEYsD2-G_lQtzck335fodn-30lclB-eMrCJkDgNQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{local}}/auth/logout",
+					"host": [
+						"{{local}}"
+					],
+					"path": [
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
