@@ -1,5 +1,6 @@
 # Information
-Routes TODO
+nous avons créé un export postman portant le nom "eval universal node.postman_collection.json" à disposition de le repo.
+ATTENTION il ne faut pas oublier de créer une variable global comportant le nom "local" et ayant pour valeur local:3000
 
 
 # SUJET 
