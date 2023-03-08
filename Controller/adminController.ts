@@ -2,6 +2,7 @@ import { Router } from 'express'
 import  {Model} from '../Models/Model';
 import { User, CreateUserSchema, UpdateArtistSchema, removePassword, UpdateUserInfoSchema, UpdateArtistbannedSchema } from '../Models/User'
 import { hashPassword } from '../Services/HashService';
+import { verifyUniqueUser } from '../Services/VerifyUniqueUserService'
 
 const router = Router()
 
@@ -26,15 +27,21 @@ router.get('/users', async (req, res) => {
 router.post('/addManager', async (req, res) => {
   const { error } = CreateUserSchema.validate(req.body);
   if (error) return res.status(400).json({error : error.details[0].message });
+  const role = "manager";
 
-  if (req.body.role !== 'manager') return res.status(404).json({error : `Vous ne pouvez pas créer autre chose qu'un manager.` });
+  let userName = req.body.userName;
+  if (!userName) {
+    userName = ""
+  }
 
-  const isUserAlreadyExist = await User.findOne({ email: req.body.email, userName: req.body.username });
-  if (isUserAlreadyExist) return res.status(400).json({ error: 'Utilisateur déja existant.' });
+  if (!await verifyUniqueUser(userName, req.body.email)) {
+    return res.status(400).json({ error: 'Manager déja existant.' });
+  }
 
   const user = new User({
     ...req.body,
     password: hashPassword(req.body.password),
+    role: role
   });
   await user.save();
 
