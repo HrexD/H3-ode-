@@ -8,7 +8,6 @@ const router = Router()
 
 // Middleware pour vérifier si l'utilisateur possede le role "admin" ou "artist"
 router.use((req, res, next) => {
-  console.log((req.session as any).user.role)
   if (!(req.session as any).user || (req.session as any).user.role !== 'admin' && (req.session as any).user.role !== 'artist') {
     return res.status(401).json({ message: "Vous n'avez pas les droits nécessaires pour accéder à cette resource (artist)." });
   }
@@ -54,21 +53,6 @@ router.get('/models', async (req, res) => {
     .json(modelsWithoutApprovals);
 });
 
-
-// Recherche d'une maquette par l'id de l'artiste et de l'id de la maquette
-router.get('/models/:modelId', async (req, res) => {
-  const artist = (req.session as any).user
-  const { modelId } = req.params
-  const model = await Model.findOne({ _id: modelId });
-  if (!model) return res.status(404).json({ error: `La maquette possedant l'ID ${modelId} est introuvable.` });
-
-  const modelWithoutApprovals = removeApprovals(model.toObject());
-
-  return res
-    .status(200)
-    .json(modelWithoutApprovals);
-});
-
 // Création d'une nouvelle maquette pour un artiste 
 // + Middleware => Vérification si c'est bien un artiste qui fait la requete de création
 router.post('/models', async (req, res) => {
@@ -101,37 +85,61 @@ router.post('/models', async (req, res) => {
 
 });
 
+// Recherche d'une maquette par l'id de la maquette
+router.get('/models/:modelId', async (req, res) => {
+  const artist = (req.session as any).user
+  const { modelId } = req.params
+  const model = await Model.findOne({ _id: modelId });
+  if (!model) return res.status(404).json({ error: `La maquette possedant l'ID ${modelId} est introuvable.` });
+
+  if (model.artistId !== artist._id)
+    return res.status(404).json({ error: `Vous ne pouvez pas acceder à une maquette qui n'est pas la votre.` });
+
+  const modelWithoutApprovals = removeApprovals(model.toObject());
+
+  return res
+    .status(200)
+    .json(modelWithoutApprovals);
+});
+
 // Update une maquette par l'ID de la maquette et de l'artiste
-router.put('/:id/models/:modelId', async (req, res) => {
+router.put('/models/:modelId', async (req, res) => {
   
   const { error } = CreateModelSchema.validate(req.body);
 
-  const { id, modelId } = req.params;
+  if ((req.session as any).user.role !== 'artist') {
+    return res.status(401).json({ message: "Vous n'avez pas l'autorisation de modifier cette maquette, seulement l'artiste créateur peut le faire." });
+  }
+
+  const { modelId } = req.params;
   const model = await Model.findOneAndUpdate(
-    { _id: modelId, artist: { id: id } },
+    { _id: modelId, artistId: (req.session as any).user._id },
     req.body,
     { new: true }
   );
+  
   if (!model) {
-    return res.status(404).json({ message: `La maquette possedant l'ID ${req.params.modelId} avec l'artiste possedant l'ID ${req.params.id} est introuvable.` });
+    return res.status(404).json({ message: `La maquette possedant l'ID ${modelId}  est introuvable.` });
   }
 
-  const modelsWithoutApprovals = removeApprovals(model.map((model: typeof Model) => removeApprovals(model.toObject())));
+  const modelsWithoutApprovals = removeApprovals(model.toObject());
 
   return res.status(200).json(modelsWithoutApprovals);
 });
 
 // Suppression d'une maquette pour un artiste en fonction d'un ID
-router.delete('/:id/models/:modelId', async (req, res) => {
-  const { id, modelId } = req.params;
+router.delete('/models/:modelId', async (req, res) => {
+  const { modelId } = req.params;
+  const artist = (req.session as any).user;
+
   const model = await Model.findOneAndDelete({
-    _id: modelId,
-    artistId: id,
+    _id: modelId, 
+    artistId: artist._id
   });
   if (!model) {
-    return res.status(404).json({ message: `La maquette possedant l'ID ${req.params.modelId} avec l'artiste possedant l'ID ${req.params.id} est introuvable.` });
+    return res.status(404).json({ message: `La maquette possedant l'ID ${modelId} est introuvable.` });
   }
-  return res.status(204).json(`La maquette possedant l'ID ${req.params.modelId} avec l'artiste possedant l'ID ${req.params.id} a été supprimée avec succès.`);
+  return res.status(200).json(`La maquette possedant l'ID ${modelId} a été supprimée avec succès.`);
 });
 
 export default router;
